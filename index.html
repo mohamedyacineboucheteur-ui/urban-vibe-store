@@ -1,42 +1,3 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الإكسسوارات الشبابية | UrbanVibe</title>
-    <!-- استيراد الخطوط والأيقونات -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <!-- شريط التنقل العلوي -->
-    <header>
-        <div class="logo">Urban<span>Vibe</span>.</div>
-        <nav>
-            <ul>
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#products">التشكيلة</a></li>
-                <li><a href="#about">من نحن</a></li>
-                <li><a href="#contact">تواصل معنا</a></li>
-            </ul>
-        </nav>
-        <div class="cart-icon">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span class="badge">0</span>
-        </div>
-    </header>
-
-    <!-- قسم الواجهة الرئيسية -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>ارتقِ بأسلوبك مع أحدث الإكسسوارات الشبابية</h1>
-            <p>تشكيلة حصرية تجمع بين الأناقة العصرية واللمسة الجريئة لتناسب أسلوب حياتك اليومي.</p>
-            <a href="#products" class="btn">استكشف التشكيلة</a>
-        </div>
-    </section>
-
 <!-- قسم المنتجات -->
     <section id="products" class="products-section">
         <h2>إكسسوارات وحمايات الآيفون (11 Pro Max إلى 17 Pro Max)</h2>
@@ -50,7 +11,7 @@
                 <div class="product-info">
                     <h3>جراب سيليكون آيفون 11 Pro Max</h3>
                     <p class="price">1,200 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
+                    <button class="add-to-cart" data-product="جراب سيليكون آيفون 11 Pro Max">اطلب الآن</button>
                 </div>
             </div>
 
@@ -62,7 +23,7 @@
                 <div class="product-info">
                     <h3>حماية زجاجية كاملة 12 Pro Max</h3>
                     <p class="price">1,400 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
+                    <button class="add-to-cart" data-product="حماية زجاجية كاملة 12 Pro Max">اطلب الآن</button>
                 </div>
             </div>
 
@@ -74,7 +35,7 @@
                 <div class="product-info">
                     <h3>كفر مُمغنط (MagSafe) لـ 13 Pro Max</h3>
                     <p class="price">2,000 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
+                    <button class="add-to-cart" data-product="كفر مُمغنط (MagSafe) لـ 13 Pro Max">اطلب الآن</button>
                 </div>
             </div>
 
@@ -86,7 +47,7 @@
                 <div class="product-info">
                     <h3>حماية عدسات الكاميرا 14 Pro Max</h3>
                     <p class="price">1,000 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
+                    <button class="add-to-cart" data-product="حماية عدسات الكاميرا 14 Pro Max">اطلب الآن</button>
                 </div>
             </div>
 
@@ -98,7 +59,7 @@
                 <div class="product-info">
                     <h3>جراب فاخر من التيتانيوم 15 Pro Max</h3>
                     <p class="price">2,800 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
+                    <button class="add-to-cart" data-product="جراب فاخر من التيتانيوم 15 Pro Max">اطلب الآن</button>
                 </div>
             </div>
 
@@ -110,7 +71,7 @@
                 <div class="product-info">
                     <h3>كفر شفاف مقاوم للصدمات 16 Pro Max</h3>
                     <p class="price">2,200 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
+                    <button class="add-to-cart" data-product="كفر شفاف مقاوم للصدمات 16 Pro Max">اطلب الآن</button>
                 </div>
             </div>
 
@@ -122,75 +83,38 @@
                 <div class="product-info">
                     <h3>التشكيلة الذكية الحديثة 17 Pro Max</h3>
                     <p class="price">3,500 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
+                    <button class="add-to-cart" data-product="التشكيلة الذكية الحديثة 17 Pro Max">اطلب الآن</button>
                 </div>
             </div>
 
         </div>
     </section>
+
+    <!-- نافذة استمارة الطلب المنبثقة (Modal) -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>تأكيد الطلب</h2>
+            <p id="selectedProductText" style="color: #ffb703; margin-bottom: 15px; font-weight: bold;"></p>
             
-            <!-- منتج 1 -->
-            <div class="product-card">
-                <div class="product-img">
-                    <i class="fa-solid fa-clock"></i>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="fullName" required placeholder="أدخل اسمك الكامل">
                 </div>
-                <div class="product-info">
-                    <h3>ساعة معدنية عصرية</h3>
-                    <p class="price">4,500 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="phone" required placeholder="مثال: 06xxxxxxxx">
                 </div>
-            </div>
-
-            <!-- منتج 2 -->
-            <div class="product-card">
-                <div class="product-img">
-                    <i class="fa-solid fa-ring"></i>
+                <div class="form-group">
+                    <label>الولاية / المدينة</label>
+                    <input type="text" id="city" required placeholder="مثال: وهران">
                 </div>
-                <div class="product-info">
-                    <h3>خاتم ستانلس ستيل أسود</h3>
-                    <p class="price">1,800 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
+                <div class="form-group">
+                    <label>العنوان بالتفصيل</label>
+                    <textarea id="address" rows="3" required placeholder="الحي، الشارع، أو نقطة الدلالة"></textarea>
                 </div>
-            </div>
-
-            <!-- منتج 3 -->
-            <div class="product-card">
-                <div class="product-img">
-                    <i class="fa-solid fa-glasses"></i>
-                </div>
-                <div class="product-info">
-                    <h3>نظارات شمسية بتصميم جريء</h3>
-                    <p class="price">3,200 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
-                </div>
-            </div>
-
-            <!-- منتج 4 -->
-            <div class="product-card">
-                <div class="product-img">
-                    <i class="fa-solid fa-link"></i>
-                </div>
-                <div class="product-info">
-                    <h3>سلسلة معدنية للرقبة</h3>
-                    <p class="price">2,500 دج</p>
-                    <button class="add-to-cart">أضف للسلة</button>
-                </div>
-            </div>
-
+                <button type="submit" class="submit-order-btn">إرسال الطلب عبر واتساب</button>
+            </form>
         </div>
-    </section>
-
-    <!-- التذييل -->
-    <footer id="contact">
-        <p>&copy; 2026 UrbanVibe. جميع الحقوق محفوظة.</p>
-        <div class="socials">
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <div class="socials">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    </div>
