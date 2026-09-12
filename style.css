@@ -1,18 +1,11 @@
 const modal = document.getElementById('orderModal');
+const openModalBtn = document.getElementById('openModalBtn');
 const closeBtn = document.querySelector('.close-btn');
-const orderButtons = document.querySelectorAll('.add-to-cart');
-const selectedProductText = document.getElementById('selectedProductText');
 const orderForm = document.getElementById('orderForm');
 
-let currentProduct = "";
-
-// فتح النافذة عند الضغط على "اطلب الآن"
-orderButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        currentProduct = e.target.getAttribute('data-product');
-        selectedProductText.textContent = "المنتج: " + currentProduct;
-        modal.style.display = 'flex';
-    });
+// فتح نافذة الاستمارة عند الضغط على Buy Now
+openModalBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
 });
 
 // إغلاق النافذة
@@ -26,32 +19,32 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// معالجة بيانات الاستمارة وتحويلها إلى رسالة واتساب
+// معالجة البيانات وإرسالها إلى تطبيق واتساب
 orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
+    const iphoneModel = document.getElementById('iphoneModel').value;
     const fullName = document.getElementById('fullName').value;
     const phone = document.getElementById('phone').value;
     const city = document.getElementById('city').value;
     const address = document.getElementById('address').value;
 
-    // استبدل هذا الرقم برقم هاتفك الشخصي (مع رمز الدولة، مثلاً: 213 لصالح الجزائر بدون علامة +)
+    // استبدل هذا الرقم برقم هاتفك الشخصي مع رمز الدولة (بدون علامة +، مثلاً: 213...)
     const myWhatsAppNumber = "213700000000"; 
 
-    const message = `مرحباً، أريد طلب هذا المنتج:
-📦 المنتج: ${currentProduct}
-👤 الاسم: ${fullName}
-📞 الهاتف: ${phone}
-📍 الولاية: ${city}
-🏠 العنوان: ${address}`;
+    const message = `New Order from Website:
+📦 Product: Heavy Duty Case
+📱 Model: ${iphoneModel}
+👤 Name: ${fullName}
+📞 Phone: ${phone}
+📍 City: ${city}
+🏠 Address: ${address}`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`;
 
-    // فتح واتساب بالرسالة الجاهزة
     window.open(whatsappURL, '_blank');
     
-    // إغلاق النافذة وتفريغ الحقول
     modal.style.display = 'none';
     orderForm.reset();
 });
